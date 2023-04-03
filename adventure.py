@@ -41,7 +41,7 @@ while True:
         # Parse the input and execute the command
             if command.lower().startswith("go"):
                 direction = command[3:].lower()
-                if(command.strip() == 'go'):
+                if(command.strip().lower() == 'go'):
                     print("Sorry, you need to 'go' somewhere.")
                 elif direction in (dir.lower() for dir in room['exits']):
                     print(f"You go {direction}.\n")
@@ -65,7 +65,7 @@ while True:
                             l.append(exit)
                             f=1
                     if f==1:
-                        print("Did you want me to go ","or ".join(l))
+                        print("Did you want me to go "," or ".join(l))
                     else:
                         print(f"There's no way to go {direction}.")
 
@@ -172,7 +172,7 @@ while True:
                             l.append(exit)
                             f=1
                     if f==1:
-                        print("Did you want me to go ","or ".join(l))
+                        print("Did you want me to go "," or ".join(l))
                     else:
                         print("Please enter vaid command.")
         except EOFError:
