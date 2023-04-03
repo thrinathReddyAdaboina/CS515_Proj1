@@ -2,42 +2,6 @@ import json
 import sys
 # # Load the game map from the file and validate it
 
-
-
-
-# def validate_map(map_json):
-#     try:
-#         map_data = json.loads(map_json)
-#     except ValueError:
-#         return False, "Invalid JSON format"
-    
-#     if not isinstance(map_data, list):
-#         return False, "Map must be a JSON list"
-    
-#     for i, room in enumerate(map_data):
-#         if not isinstance(room, dict):
-#             return False, f"Room {i} is not a JSON object"
-        
-#         if "name" not in room or not isinstance(room["name"], str):
-#             return False, f"Room {i} is missing name or name is not a string"
-        
-#         if "desc" not in room or not isinstance(room["desc"], str):
-#             return False, f"Room {i} is missing desc or desc is not a string"
-        
-#         if "exits" not in room or not isinstance(room["exits"], dict):
-#             return False, f"Room {i} is missing exits or exits is not an object"
-        
-#         for direction, dest_id in room["exits"].items():
-#             if not isinstance(direction, str):
-#                 return False, f"Room {i} exit direction is not a string"
-            
-#             if not isinstance(dest_id, int) or dest_id >= len(map_data) or dest_id < 0:
-#                 return False, f"Room {i} exit destination is not a valid room id"
-        
-#         if "items" in room and not isinstance(room["items"], list):
-#             return False, f"Room {i} items is not a list"
-    
-# validate_map(sys.argv[1])
 with open(sys.argv[1]) as f:
     game_map = json.load(f)
 for room in game_map:
@@ -59,19 +23,16 @@ for room in game_map:
 # Initialize the game world
 current_room = 0
 inventory = []
-def handle_input(user_input):
-    if user_input == 'quit':
-        print('Goodbye!')
-        sys.exit(0)
+directions=["north","south","east","west","northwest","southwest","northeast","southeast"]
 
 room= game_map[current_room]
 print(f"> {room['name']}\n")
 print(f"{room['desc']}\n")
-if('items' in room):
+if('items' in room and room['items'] !=[]):
     print("Items:",", ".join(room['items']))
-    print("")
+    print()
 print("Exits:", " ".join(room['exits']))
-print("")
+print()
 
 while True:
         try: 
@@ -93,9 +54,9 @@ while True:
                     print(f"{room['desc']}\n")
                     if('items' in room):
                           print("Items:",", ".join(room['items']).lower())
-                          print("")
+                          print()
                     print("Exits:", " ".join(room['exits']).lower())
-                    print("")
+                    print()
                 else:
                     l=[]
                     f=0
@@ -131,9 +92,9 @@ while True:
                 
                 if('items' in room and room['items'] !=[]):
                     print("Items:",", ".join(room['items']))
-                    print("")
+                    print()
                 print("Exits:", " ".join(room['exits']))
-                print("")
+                print()
             elif command.lower() == "inventory":
                 if item in inventory!=[]:
                     print("Inventory:")
@@ -201,6 +162,8 @@ while True:
                         print("")
                         print("Exits:", " ".join(room['exits']))
                         print("")
+                elif command.lower() in directions and command.lower() not in room['exits']:
+                        print(f"There's no way to go {command}")
                 else:
                     l=[]
                     f=0
@@ -210,7 +173,7 @@ while True:
                             f=1
                     if f==1:
                         print("Did you want me to go ","or ".join(l))
+                    else:
+                        print("Please enter vaid command.")
         except EOFError:
             print("\nUse 'quit' to exit.")
-
-        
