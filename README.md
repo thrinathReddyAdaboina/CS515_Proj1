@@ -6,7 +6,7 @@ Thrinath Reddy Adaboina  tadaboin@stevens.edu
 
 https://github.com/thrinathReddyAdaboina/CS515_Proj1
 
-I have worked around 40-60 hours on the project (the most efficient time overall it might be more than that :p)
+I have worked around 60-80 hours on the project (the most efficient time overall it might be more than that :p)
 
 I have tested my code by taking appropriate map examples from the canvas examples and tested in gradescrope at last.
 
